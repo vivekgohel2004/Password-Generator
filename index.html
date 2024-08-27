@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <main class="wrapper bg-[#F8EDE3] h-screen w-full overflow-hidden flex justify-center items-center ">
+
+        <div class="container flex-col text-white space-y-5 justify-center items-center text-[1.5rem] max-w-[25rem]">
+            <!-- section 1 -->
+            <div class="heading mb-10 text-black text-[2.1rem] text-center px-4 py-2">
+                <h1>PASSWORD GENERATOR</h1>
+            </div>
+            <!-- section 2 -->
+            <div class="password bg-orange-900 flex px-2 justify-around py-2 w-full rounded-t-lg relative">
+                <input readonly data-passwordDisplay class=" text-[1.2rem] bg-transparent w-full outline-none">
+                <div class="copyIcon group cursor-pointer">
+                    <!-- <i class="fa-regular fa-copy hover:scale-105"></i> -->
+                    <!-- <span data-copyMsg class=" shadow-2xl absolute bottom-10 right-5 text-white text-[1.3rem] font-semibold bg-[#987070] pb-2 px-2 rounded-md "></span> -->
+                </div>
+                
+            </div>
+            <!-- section 3 -->
+            <div class="functioning bg-orange-900  flex flex-col justify-center items-center rounded-b-lg space-y-3 py-4">
+
+                <div class="password-length flex-col px-10 w-full">
+
+                    <div class="flex justify-between">
+                        <span>Password Length</span>
+                        <span data-lengthNumber></span>
+                    </div>
+
+                    <input data-lengthSlider type="range" min="1" max="20" class="w-80 cursor-pointer" step="1"
+                        id="slider">
+                </div>
+
+                <!-- check boxes -->
+                <div class="checkboxes  flex flex-col ">
+                    <div>
+                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="uppercase">Include Uppercase Letters
+                    </div>
+                    <div>
+                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="lowercase">Include Lowercase Letters
+                    </div>
+                    <div>
+                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="numbers">Include Numbers
+                    </div>
+                    <div>
+                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="symbols">Include Symbols
+                    </div>
+                </div>
+
+                <!-- <div class="strength flex justify-between px-10 w-full">
+                    <span>Strength</span>
+                    <div data-indicator id="strengthUpdate" class="bg-gray-50 rounded-[20rem] w-9"></div>
+                </div> -->
+
+                <button data-btn
+                    class="bg-[#987070] px-7 py-1 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-[#F8EDE3] hover:text-black transition-all duration-[0.2s] ease-in">GENERATE
+                    PASSWORD</button>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- script -->
+    <script src="https://kit.fontawesome.com/d1eb4ad0e2.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
