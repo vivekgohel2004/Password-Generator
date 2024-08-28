@@ -5,66 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
 
-    <main class="wrapper bg-[#F8EDE3] h-screen w-full overflow-hidden flex justify-center items-center ">
+    <main class="wrapper bg-[#F8EDE3] h-screen w-full overflow-hidden flex justify-center items-start ">
 
-        <div class="container flex-col text-white space-y-5 justify-center items-center text-[1.5rem] max-w-[25rem]">
+        <div
+            class="container flex-col text-white space-y-5 justify-center m-2 items-center text-[1.5rem] max-w-[30rem]">
             <!-- section 1 -->
-            <div class="heading mb-10 text-black text-[2.1rem] text-center px-4 py-2">
+            <div class="heading mt-5 mb-10 text-black text-[2.1rem] text-center px-4 py-2 tracking-wider font-semibold">
                 <h1>PASSWORD GENERATOR</h1>
             </div>
             <!-- section 2 -->
-            <div class="password bg-orange-900 flex px-2 justify-around py-2 w-full rounded-t-lg relative">
-                <input readonly data-passwordDisplay class=" text-[1.2rem] bg-transparent w-full outline-none">
+            <div class="password bg-orange-900 flex px-2 justify-around py-2 w-full rounded-lg relative">
+                <input readonly data-passwordDisplay placeholder="Password"
+                    class=" placeholder:font-bold placeholder:font-mono placeholder:text-[1.5rem] text-[1.2rem] bg-transparent w-full outline-none font-mono font-bold tracking-[0.1rem] ">
+
+                <!-- 
                 <div class="copyIcon group cursor-pointer">
-                    <!-- <i class="fa-regular fa-copy hover:scale-105"></i> -->
-                    <!-- <span data-copyMsg class=" shadow-2xl absolute bottom-10 right-5 text-white text-[1.3rem] font-semibold bg-[#987070] pb-2 px-2 rounded-md "></span> -->
-                </div>
-                
+                    <i class="fa-regular fa-copy hover:scale-105"></i>
+                    <span data-copyMsg class=" shadow-2xl absolute bottom-10 right-5 text-white text-[1.3rem] font-semibold bg-[#987070] pb-2 px-2 rounded-md "></span>
+                </div> -->
+
+                <button class="copyBtn relative" data-copy>
+                    <i class="fa-regular fa-copy hover:scale-105"></i>
+                    <span
+                        class="absolute bottom-10 -right-2 tooltip bg-amber-800 text-[cyan] text-[1.1rem] pb-1 px-2 rounded-md"
+                        data-copyMsg></span>
+                </button>
+
             </div>
             <!-- section 3 -->
-            <div class="functioning bg-orange-900  flex flex-col justify-center items-center rounded-b-lg space-y-3 py-4">
+            <div
+                class="select-none functioning bg-orange-900  flex flex-col justify-center items-center rounded-lg space-y-3 py-4 h-full">
 
                 <div class="password-length flex-col px-10 w-full">
 
                     <div class="flex justify-between">
                         <span>Password Length</span>
-                        <span data-lengthNumber></span>
+                        <span data-lengthNumber class="text-[cyan] font-semibold"></span>
                     </div>
 
-                    <input data-lengthSlider type="range" min="1" max="20" class="w-80 cursor-pointer" step="1"
+                    <input data-lengthSlider type="range" min="1" max="20" class="min-w-full cursor-pointer" step="1"
                         id="slider">
                 </div>
 
                 <!-- check boxes -->
                 <div class="checkboxes  flex flex-col ">
                     <div>
-                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="uppercase">Include Uppercase Letters
+                        <input type="checkbox" class="check mx-2 h-[1rem] w-[1rem]" id="uppercase">Include Uppercase
+                        Letters
                     </div>
                     <div>
-                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="lowercase">Include Lowercase Letters
+                        <input type="checkbox" class="check mx-2 h-[1rem] w-[1rem]" id="lowercase">Include Lowercase
+                        Letters
                     </div>
                     <div>
-                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="numbers">Include Numbers
+                        <input type="checkbox" class="check mx-2 h-[1rem] w-[1rem]" id="numbers">Include Numbers
                     </div>
                     <div>
-                        <input type="checkbox" class="mx-2 h-[1rem] w-[1rem]" id="symbols">Include Symbols
+                        <input type="checkbox" class="check mx-2 h-[1rem] w-[1rem]" id="symbols">Include Symbols
                     </div>
                 </div>
 
-                <!-- <div class="strength flex justify-between px-10 w-full">
+                <div class="strength flex justify-between px-10 w-full">
                     <span>Strength</span>
                     <div data-indicator id="strengthUpdate" class="bg-gray-50 rounded-[20rem] w-9"></div>
-                </div> -->
+                </div>
+
+                <div class="h-14 md:h-full"></div>
 
                 <button data-btn
-                    class="bg-[#987070] px-7 py-1 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-[#F8EDE3] hover:text-black transition-all duration-[0.2s] ease-in">GENERATE
-                    PASSWORD</button>
+                    class="bg-[#987070] px-3 md:px-7 md:py-1 rounded-md hover:shadow-2xl hover:scale-105 hover:bg-[#F8EDE3] hover:text-black transition-all duration-[0.2s] linear font-semibold text-[1.3rem] md:text-[1.5rem]">GENERATE
+                    PASSWORD
+                </button>
 
             </div>
         </div>

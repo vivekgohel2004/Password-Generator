@@ -1,5 +1,6 @@
 const passwordDisplay = document.querySelector('[data-passwordDisplay]');
-const copyMsg = document.querySelector('[data-copyMsg]');
+const copyBtn = document.querySelector("[data-copy]");
+const copyMsg = document.querySelector("[data-copyMsg]");
 const lengthDisplay = document.querySelector('[data-lengthNumber]');
 const inputSlider = document.querySelector('[data-lengthSlider]');
 const uppercaseCheck = document.querySelector('#uppercase');
@@ -15,16 +16,16 @@ const symbols = "@#$";
 let password = "";
 let passwordLength = 10;
 let checkboxCount = 0;
-// strength circle color to grey
 
 sliderHandle();
 function sliderHandle() {
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
+    inputSlider.style.backgroundSize = (passwordLength * 5) + "%"; // to fill background colour till value / thumb
 }
 
 function getRandomInteger(min, max) {
-    var x = Math.floor(Math.random() * (max-min ) + min);
+    var x = Math.floor(Math.random() * (max - min) + min); // to get random between min and max
     console.log(x);
     return x;
 }
@@ -34,9 +35,8 @@ function generateNumber() {
 }
 
 function generateLowerCase() {
-    var x2 = String.fromCharCode(getRandomInteger(97, 123)); // Generates character from ASCII value
-    console.log(x2);
-    return x2;
+    return String.fromCharCode(getRandomInteger(97, 123)); // Generates character from ASCII value
+    
 }
 
 function generateUpperCase() {
@@ -58,13 +58,13 @@ function calculateStrength() {
     let uc = true;
     (uppercaseCheck.checked) ? uc = true : uc = false;
 
-    let lc= true;
+    let lc = true;
     (lowercaseCheck.checked) ? lc = true : lc = false;
 
-    let num= true;
+    let num = true;
     (numbersCheck.checked) ? num = true : num = false;
 
-    let symb= true;
+    let symb = true;
     (symbolsCheck.checked) ? symb = true : symb = false;
 
 
@@ -78,6 +78,7 @@ function calculateStrength() {
     else if ((uc || lc) && (num || symb) && passwordLength > 5) {
         setIndicator("yellow");
     }
+    
     // Red: Weak password 
     else if (passwordLength > 0) {
         setIndicator("red");
@@ -89,44 +90,34 @@ function calculateStrength() {
     }
 }
 
-// to use await, it must be in async function 
-// async function copyContent() {
-
-//     try {
-//         // await is used to make sure not to show message copied before successfully copying
-//         await navigator.clipboard.writeText(passwordDisplay.value); // method to copy in clipboard```
-//     }
-
-//     catch (error) {
-//         copyMsg.innerText = "failed";
-//     }
-
-//     // to make copy span visible
-//     copyMsg.classList.add('active');
-
-//     // to mak copy span hidden after 2s
-//     setTimeout(() => {
-//         copyMsg.innerText = "failed";
-//         copyMsg.classList.remove('active');
-//     }, 2000);
-// }
-
 inputSlider.addEventListener('input', () => {
     passwordLength = inputSlider.value;
     sliderHandle();
 });
 
-// above or below
+// to use await, it must be in async function 
+async function copyContent() {
+    try {
+        await navigator.clipboard.writeText(passwordDisplay.value);
+        copyMsg.innerText = "Copied";
+    }
+    catch (e) {
+        copyMsg.innerText = "Failed";
+    }
 
-// inputSlider.addEventListener("input",(e) => {
-// passwordLength = e.target.value;
-// sliderHandle();
-// });
+    //to make copy wala span visible
+    copyMsg.classList.add('active');
 
-// copyMsg.addEventListener('click', () => {
-//     if (passwordDisplay.value)
-//         copyContent();
-// })
+    setTimeout(() => {
+        copyMsg.classList.remove('active');
+    }, 2000);
+
+}
+
+copyBtn.addEventListener('click', () => {
+    if (passwordDisplay.value)
+        copyContent();
+})
 
 function handleCheckBoxChange() {
     checkboxCount = 0;
@@ -147,6 +138,17 @@ allCheckbox.forEach((checkbox) => {
     checkbox.addEventListener('change', handleCheckBoxChange);
 })
 
+function shufflePassword(password) {
+
+    for (let i = password.length; i > 0; i--) {
+
+        let j = Math.floor(Math.random() * (i + 1));
+        [password[i], password[j]] = [password[j], password[i]];    // swapping 
+    }
+
+    return password;
+
+}
 
 generateBtn.addEventListener('click', () => {
     if (checkboxCount == 0) {
@@ -196,7 +198,13 @@ generateBtn.addEventListener('click', () => {
         password += funcArr[randomdIndex]();
     }
 
+    password = shufflePassword(Array.from(password));   // converts the string into an array of characters.
+
+    // The join() method in JavaScript is used to combine all elements of an array into a single string.
+    password = password.join("");
+
     passwordDisplay.value = password;
+
     calculateStrength();
 
 })
